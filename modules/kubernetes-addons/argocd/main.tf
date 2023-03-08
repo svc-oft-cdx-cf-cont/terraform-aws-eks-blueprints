@@ -14,6 +14,15 @@ resource "kubernetes_namespace_v1" "this" {
   }
 }
 
+# ---------------------------------------
+# Delay destroy of argo after app of apps
+# ---------------------------------------
+resource "time_sleep" "wait_60_seconds" {
+  depends_on = [module.helm_addon]
+
+  destroy_duration = "60s"
+}
+
 # ---------------------------------------------------------------------------------------------------------------------
 # ArgoCD App of Apps Bootstrapping (Helm)
 # ---------------------------------------------------------------------------------------------------------------------
@@ -88,7 +97,10 @@ resource "helm_release" "argocd_application" {
     })
   ]
 
-  depends_on = [module.helm_addon]
+  depends_on = [
+    module.helm_addon,
+    time_sleep.wait_60_seconds
+  ]
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -110,7 +122,10 @@ resource "kubectl_manifest" "argocd_kustomize_application" {
     }
   )
 
-  depends_on = [module.helm_addon]
+  depends_on = [
+    module.helm_addon,
+    time_sleep.wait_60_seconds
+  ]
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
