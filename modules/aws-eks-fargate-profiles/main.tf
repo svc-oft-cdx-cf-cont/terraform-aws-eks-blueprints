@@ -74,7 +74,7 @@ data "aws_iam_policy_document" "cwlogs" {
   statement {
     sid       = ""
     effect    = "Allow"
-    resources = ["*"]
+    resources = ["arn:aws:logs:*:*:*"]
 
     actions = [
       "logs:CreateLogGroup",
