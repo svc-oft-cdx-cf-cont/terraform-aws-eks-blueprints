@@ -31,7 +31,7 @@ data "aws_iam_policy_document" "eks_key" {
       "kms:GenerateDataKey*",
       "kms:ReEncrypt*",
     ]
-    resources = ["arn:${local.context.aws_partition_id}:kms:${local.context.aws_region_name}:${local.context.aws_caller_identity_account_id}:key/*"]
+    resources = ["*"]
 
     principals {
       type = "AWS"
@@ -62,7 +62,7 @@ data "aws_iam_policy_document" "eks_key" {
       "kms:List*",
       "kms:RevokeGrant",
     ]
-    resources = ["arn:${local.context.aws_partition_id}:kms:${local.context.aws_region_name}:${local.context.aws_caller_identity_account_id}:key/*"]
+    resources = ["*"]
 
     principals {
       type = "AWS"
@@ -78,7 +78,7 @@ data "aws_iam_policy_document" "eks_key" {
     actions = [
       "kms:*"
     ]
-    resources = ["arn:${local.context.aws_partition_id}:kms:${local.context.aws_region_name}:${local.context.aws_caller_identity_account_id}:key/*"]
+    resources = ["*"]
 
     principals {
       type = "AWS"
@@ -99,7 +99,7 @@ data "aws_iam_policy_document" "eks_key" {
       "kms:GenerateDataKey*",
       "kms:ReEncrypt*",
     ]
-    resources = ["arn:${local.context.aws_partition_id}:kms:${local.context.aws_region_name}:${local.context.aws_caller_identity_account_id}:key/*"]
+    resources = ["*"]
 
     principals {
       type = "AWS"
@@ -119,7 +119,8 @@ data "aws_iam_policy_document" "eks_key" {
       "kms:ListGrants",
       "kms:RevokeGrant",
     ]
-    resources = ["arn:${local.context.aws_partition_id}:kms:${local.context.aws_region_name}:${local.context.aws_caller_identity_account_id}:key/*"]
+    resources = ["*"]
+
     principals {
       type = "AWS"
       identifiers = [
