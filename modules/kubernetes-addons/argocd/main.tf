@@ -33,10 +33,10 @@ resource "helm_release" "argocd_application" {
   chart     = "${path.module}/argocd-application/helm"
   version   = "1.0.0"
   namespace = local.helm_config["namespace"]
-  wait                       = coalesce(try(each.value.helm_config["wait"], null), local.helm_config["wait"], true)
-  wait_for_jobs              = coalesce(try(each.value.helm_config["wait_for_jobs"], null), local.helm_config["wait_for_jobs"], true)
-  dependency_update          = coalesce(try(each.value.helm_config["dependency_update"], null), local.helm_config["dependency_update"], true)
-  replace                    = coalesce(try(each.value.helm_config["replace"], null), local.helm_config["replace"], false)
+  wait                       = try(each.value.helm_config["wait"], try(local.helm_config["wait"], true))
+  wait_for_jobs              = try(each.value.helm_config["wait_for_jobs"], try(local.helm_config["wait_for_jobs"], true))
+  dependency_update          = try(each.value.helm_config["dependency_update"], try(local.helm_config["dependency_update"], true))
+  replace                    = try(each.value.helm_config["replace"], try(local.helm_config["replace"], false))
 
   # Application Meta.
   set {
