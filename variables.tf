@@ -393,6 +393,12 @@ variable "aws_auth_additional_labels" {
   default     = {}
 }
 
+variable "create_aws_auth" {
+  description = "Create aws-auth ConfigMap"
+  type        = bool
+  default     = false
+}
+
 variable "eks_readiness_timeout" {
   description = "The maximum time (in seconds) to wait for EKS API server endpoint to become healthy"
   type        = number
