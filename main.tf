@@ -8,7 +8,7 @@ locals {
 }
 
 module "kms" {
-  count  = var.create_eks && var.cluster_kms_key_arn == null && var.enable_cluster_encryption ? 1 : 0
+  count  = 0
   source = "./modules/aws-kms"
 
   alias                   = "alias/${var.cluster_name}"
